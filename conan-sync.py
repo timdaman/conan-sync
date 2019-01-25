@@ -11,7 +11,7 @@ parser.add_argument('--source', type=str, required=True,
                     help="Name of conan remote from which recipes and packages are being copied to --dest")
 parser.add_argument('--dest', type=str, required=True,
                     help="Name of conan remote receiving all of the contents of --source")
-parser.add_argument('--exec', type=str, required=False, default='conan', help="Locations of 'conan' command")
+parser.add_argument('--exec', type=str, required=False, default='conan', help="Location of 'conan' command")
 parser.add_argument('--ignore_failures', action='store_true', required=False, help="Ignore failures")
 
 args = parser.parse_args(sys.argv[1:])
@@ -31,7 +31,7 @@ def run_conan(args, reraise_error=False):
         print("Command failed")
         print(repr(e))
         if hasattr(e, 'returncode'):
-            rc = "rc=" + e.returncode
+            rc = "rc=" + str(e.returncode)
         else:
             rc = "Command timed out"
         print("{} output={}".format(rc, e.output))
